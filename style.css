@@ -1,0 +1,536 @@
+body {
+    overflow: hidden;
+    font-family: "Roboto Regular", sans-serif;
+    font-weight: 400;
+}
+
+:root {
+    --blue-color: #28245a;
+}
+
+@font-face {
+    font-family: "Roboto Regular";
+    src: local("Roboto-Regular"),
+        url("fonts/Roboto-Regular.woff") format("woff");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Roboto Medium";
+    src: local("Roboto-Medium"),
+        url("fonts/Roboto-Medium.woff") format("woff");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Roboto Bold";
+    src: local("Roboto-Bold"),
+        url("fonts/Roboto-Bold.woff") format("woff");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "RobotoCondensed";
+    src: local("RobotoCondensed-Regular"),
+        url("fonts/RobotoCondensed-Regular.woff") format("woff");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Verdana Bold";
+    src: local("Verdana-Bold"),
+        url("fonts/Verdana-Bold.woff") format("woff");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+.modal {
+    position: fixed;
+    z-index: 4;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    text-align: center;
+    background-color: rgba(154, 154, 154, 0.5);
+    overflow-y: auto;
+    transition: opacity 0.5s;
+}
+
+.modal::after {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.modal__content {
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding: 56px 64px 32px 64px;
+    position: relative;
+    z-index: 4;
+    min-height: 200px;
+    overflow: visible;
+    border-radius: 16px;
+    background-color: #fff;
+    animation-name: modalOpen;
+    animation-duration: 1s;
+    box-shadow: 0 0 41px 0 rgba(0, 0, 0, 0.19);
+}
+
+.modal__close-btn {
+    position: absolute;
+    right: -35px;
+    top: 11px;
+    width: 24px;
+    height: 24px;
+    border: none;
+    cursor: pointer;
+    background: url(img/close.svg);
+}
+
+.modal__img {
+    margin-bottom: 40px;
+}
+
+.modal__title {
+    margin: 0;
+    margin-bottom: 64px;
+    font-family: "Roboto Regular";
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 125%;
+    color: var(--blue-color);
+}
+
+.input__container {
+    position: relative;
+    width: 440px;
+}
+
+.modal__input {
+    position: relative;
+    padding: 0px 24px;
+    padding-bottom: 10px;
+    padding-top: 26px;
+    width: 392px;
+    border: none;
+    border: 1px solid #d5d5d5;
+    border-radius: 4px;
+    background-color: transparent;
+}
+
+.modal__input::placeholder {
+    position: absolute;
+    left: 24px;
+    top: 16px;
+    font-family: "Roboto Regular";
+}
+
+.modal__input:focus::placeholder {
+    opacity: 0;
+}
+
+input[type="password"] {
+    font-family: "Verdana Bold";
+}
+
+.input__container:first-child {
+   margin-bottom: 40px; 
+}
+
+.error {
+    position: relative;
+}
+
+.modal__input.error {
+    border: 1px solid #ac0000;
+}
+
+.error-label {
+    position: absolute;
+    top: -40px;
+    left: 69px;
+    color: rgb(170, 0, 31);
+    margin-bottom: 10px;
+    display: block;
+    font-size: 14px;
+}
+
+.modal__label {
+    position: absolute;
+    left: 24px;
+    top: 8px;
+    font-size: 12px;
+    line-height: 117%;
+    color: #969696;
+    opacity: 0;
+}
+
+.input__icon {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    width: 24px;
+    height: 24px;
+    background: url(img/icon.svg);
+    background-repeat: no-repeat;
+}
+
+.input__icon.view {
+    top: 20px;
+    background: url(img/open-eye.svg);
+    background-repeat: no-repeat;
+}
+
+.visible {
+    opacity: 1;
+}
+
+.modal__svg {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.margin {
+    margin-bottom: 16px;
+}
+
+.modal__marks {
+    display: flex;
+    margin-bottom: 64px;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.label__remember {
+    position: relative;
+    /* display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: center; */
+}
+
+#check {
+    display: none;
+}
+
+.label__remember span::before {
+    content: "";
+    position: absolute;
+    text-align: center;
+    left: 0;
+    top: 16%;
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    border: 2.4px solid #000;
+}
+
+.label__remember span::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 16%;
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    border: 2.4px solid var(--blue-color);
+    background-image: url(img/check_box.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0;
+}
+
+.label__remember input:checked+span::after {
+    opacity: 1;
+}
+
+.label__remember #check:checked+span::after {
+    opacity: 1;
+}
+
+.check__text {
+    text-align: center;
+    padding-left: 24px;
+    font-size: 12px;
+    line-height: 125%;
+}
+
+.modal__forgot {
+    font-family: "RobotoCondensed";
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 165%;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #1d71b8;
+}
+
+.modal__forgot:hover {
+    text-decoration: underline;
+}
+
+.modal__forgot:focus {
+    text-decoration: none;
+    opacity: 0.7;
+}
+
+.modal__btns {
+    display: flex;
+    margin-bottom: 48px;
+}
+
+.btn {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.btn__in {
+    position: relative;
+    margin-right: 8px;
+    border-radius: 4px;
+    padding: 10px 16px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 125%;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background-color: var(--blue-color);
+    color: #fff;
+}
+
+.btn__in:hover {
+    box-shadow: 0 3px 8px 0 #969696;
+}
+
+.btn__in::after {
+    content: "";
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    bottom: -2px;
+    left: -2px;
+    border: 3px solid #bcceec;
+    border-radius: 5px;
+    opacity: 0;
+}
+
+.btn__in:focus::after {
+    opacity: 1;
+    box-shadow: none;
+}
+
+.btn__in:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.btn__in:disabled {
+    background-color: #d5d5d5;
+    opacity: 0.5;
+}
+
+.btn__cancel {
+    border-radius: 4px;
+    padding: 10px 16px;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 125%;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--blue-color);
+}
+
+.btn__cancel:hover {
+    box-shadow: 0 3px 8px 0 #969696;
+}
+
+.btn__cancel:focus {
+    outline: none;
+    box-shadow: 0 0 8px 0 #bcceec;
+}
+
+.btn__olterIn {
+    margin-left: auto;
+    margin-right: 24px;
+    border: 1px solid #28245a;
+    border-radius: 4px;
+    padding: 10px 16px;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 125%;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.btn__olterIn:hover {
+    box-shadow: 0 3px 8px 0 #969696;
+}
+
+.btn__olterIn:focus {
+    outline: none;
+    box-shadow: 0 0 12px 0 #bcceec;
+}
+
+.btn__register {
+    border-radius: 4px;
+    padding: 10px 16px;
+    font-family: "RobotoCondensed";
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 125%;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--blue-color);
+}
+
+.btn__register:hover {
+    box-shadow: 0 3px 8px 0 #969696;
+}
+
+.btn__register:focus {
+    outline: none;
+    box-shadow: 0 0 8px 0 #bcceec;
+}
+
+/* модальное "Забыли пароль" */
+.modal__title-forgor {
+    margin: 0;
+    margin-bottom: 8px;
+    font-family: "Roboto Regular";
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 125%;
+    color: var(--blue-color);
+}
+
+.modal__subtitle {
+    margin-bottom: 40px;
+    font-size: 12px;
+    line-height: 117%;
+    text-align: center;
+    color: #969696;
+}
+
+.forgot__container {
+    margin-bottom: 64px;
+}
+
+.modal__btns-block {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 32px;
+}
+
+.btn__change {
+    margin-right: 32px;
+}
+
+.btn__cancel-fogot {
+    border: 1px solid #28245a;
+    border-radius: 4px;
+    padding: 10px 0px;
+    width: 162px;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 125%;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.btn__cancel-fogot:hover {
+    box-shadow: 0 3px 8px 0 #969696;
+}
+
+.btn__cancel-fogot:focus {
+    outline: none;
+    box-shadow: 0 0 12px 0 #bcceec;
+}
+
+/* восстановление пароля */
+.modal__mail-text {
+    margin: 0;
+    width: 440px;
+    font-size: 14px;
+    line-height: 125%;
+    text-align: center;
+}
+
+.margin__mail {
+    margin-bottom: 64px;
+}
+
+.modal__mail-link {
+    padding: 0 5px;
+    font-family: "RobotoCondensed";
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #28245a;
+}
+
+.modal__mail-link:hover {
+    text-decoration: underline;
+}
+
+.modal__mail-link:focus {
+    text-decoration: none;
+    opacity: 0.7;
+}
+
+.btn__close {
+    margin-bottom: 32px;
+}
+
+/* регистрация */
+.margin__input {
+    margin-bottom: 8px;
+}
+
+.modal__rule-text {
+    margin: 0;
+    margin-bottom: 18px;
+    text-align: left;
+    font-size: 12px;
+    line-height: 117%;
+    color: #d5d5d5;
+}
+
+.modal__rule-link {
+    margin-right: auto;
+    padding-left: 7px;
+}
+
+.modal__btns-register {
+    margin-bottom: 32px;
+}
+
+.modal__reg-text {
+    margin: 0;
+    font-size: 14px;
+    line-height: 125%;
+    text-align: center;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
